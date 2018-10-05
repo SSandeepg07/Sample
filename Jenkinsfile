@@ -20,7 +20,7 @@ pipeline {
 				}
 				stage ('Selenium') {
 					steps {
-						sh 'echo "skiping selenium...."
+						sh 'echo "skiping selenium...."'
 					}
 				}
 			}
