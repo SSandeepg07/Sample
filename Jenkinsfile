@@ -48,7 +48,7 @@ pipeline {
 		stage ('Docker Build & Publish') {
 			steps{
 				sh 'docker build . --build-arg JAR=app-0.0.1.jar -t sda-app'
-				tagDockerNew(oldTag: 'sda-app', image: 'code-sda-demo_code-sda-app')
+				tagDocker(oldTag: 'sda-app', image: 'code-sda-demo_code-sda-app')
 				notifyDocker();
 			}
 		}
