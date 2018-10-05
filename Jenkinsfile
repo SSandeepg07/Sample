@@ -11,6 +11,7 @@ pipeline {
 				sh 'mvn clean install'
             }
         }
+		/*
 		stage ('Test') {			
 			parallel {
 				stage ('Sonar') {
@@ -25,10 +26,12 @@ pipeline {
 				}
 			}
 		}
+		*/
 		stage ('Docker Build & Publish') {
 			steps{
 				sh 'docker build . --build-arg JAR=app-0.0.1.jar -t containers.cisco.com/jenkins_ci_gen/code-sda-app:${BUILD_NUMBER}'
 				sh 'docker push containers.cisco.com/jenkins_ci_gen/code-sda-app:${BUILD_NUMBER}'
+				sh 'docker push containers.cisco.com/jenkins_ci_gen/code-sda-app:latest'
 			}
 		}
     }
