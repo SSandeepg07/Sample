@@ -32,7 +32,8 @@ pipeline {
 			}
 		}
     }
-	post{
-		
-	}
+	
+	//post{
+	//	
+	//}
 }
