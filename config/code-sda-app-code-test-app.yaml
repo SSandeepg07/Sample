@@ -1,0 +1,90 @@
+kind: "Service"
+apiVersion: "v1"
+metadata:
+  name: "code-sda-app"
+spec:
+  ports:
+    -
+      name: "web"
+      protocol: "TCP"
+      port: 9090
+  selector:
+    name: "code-sda-app"
+  type: "ClusterIP"
+  sessionAffinity: "None"
+---
+kind: "DeploymentConfig"
+apiVersion: "v1"
+metadata:
+  name: "code-sda-app"
+spec:
+  template:
+    metadata:
+      labels:
+        name: "code-sda-app"
+      annotations:
+        app_version: 'latest'
+    spec:
+      containers:
+        -
+          name: "code-sda-app"
+          image: "containers.cisco.com/it_gats_it_architecture/code-sda-demo_code-sda-app :__IMAGETAG__"
+          ports:
+            -
+              containerPort: 9090
+              protocol: "TCP"
+          env:
+            -
+              name: "APP_NAME"
+              value: "code-sda-app"
+            -
+              name: "CISCO_LC"
+              value: "dev"
+          volumeMounts:
+            -
+              name: podinfo
+              mountPath: /etc/metadata
+              readOnly: false
+          imagePullPolicy: "IfNotPresent"
+          securityContext:
+            capabilities: {}
+            privileged: false
+          #readinessProbe:
+          #  httpGet:
+          #    path: "/"
+          #    port: 9090
+          #  initialDelaySeconds: 15
+          #  timeoutSeconds: 1
+          #livenessProbe:
+          #  exec:
+          #    command:
+          #      - "/bin/true"
+          #  initialDelaySeconds: 15
+          #  timeoutSeconds: 1
+      volumes:
+        -
+          name: podinfo
+          downwardAPI:
+            items:
+              -
+                path: "labels"
+                fieldRef:
+                  fieldPath: metadata.labels
+              -
+                path: "annotations"
+                fieldRef:
+                  fieldPath: metadata.annotations
+      restartPolicy: "Always"
+      dnsPolicy: "ClusterFirst"
+  replicas: 1
+  selector:
+    name: "code-sda-app"
+  triggers:
+    -
+      type: "ConfigChange"
+  strategy:
+    type: "Rolling"
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 120

@@ -4,6 +4,10 @@ pipeline {
 		maven 'Maven-3.3.1'
 		jdk 'JDK1.8.0'
 	}
+	
+	environment {
+		DOCKER_REPO = "containers.cisco.com/it_gats_it_architecture/code-sda-demo_code-sda-app"
+	}
 
     stages {
         stage ('Source Build') {
@@ -29,10 +33,10 @@ pipeline {
 		*/
 		stage ('Docker Build & Publish') {
 			steps{
-				sh 'docker build . --build-arg JAR=app-0.0.1.jar -t containers.cisco.com/jenkins_ci_gen/code-sda-app:${BUILD_NUMBER}'
-				sh 'docker push containers.cisco.com/jenkins_ci_gen/code-sda-app:${BUILD_NUMBER}'
-				sh 'docker tag	containers.cisco.com/jenkins_ci_gen/code-sda-app:${BUILD_NUMBER} containers.cisco.com/jenkins_ci_gen/code-sda-app:latest'
-				sh 'docker push containers.cisco.com/jenkins_ci_gen/code-sda-app:latest'
+				sh 'docker build . --build-arg JAR=app-0.0.1.jar -t ${DOCKER_REPO}:${BUILD_NUMBER}'
+				sh 'docker push ${DOCKER_REPO}:${BUILD_NUMBER}'
+				sh 'docker tag	${DOCKER_REPO}:${BUILD_NUMBER} ${DOCKER_REPO}:latest'
+				sh 'docker push ${DOCKER_REPO}:latest'
 			}
 		}
     }
