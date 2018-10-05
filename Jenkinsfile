@@ -6,7 +6,7 @@ pipeline {
 	}
 	
 	environment {
-		DOCKER_REPO = "containers.cisco.com/it_gats_it_architecture/code-sda-demo_code-sda-app"
+		DOCKER_REPO = "containers.cisco.com/it_gats_it_architecture/code-sda-demo_code-sda-app"		
 	}
 
     stages {
@@ -33,9 +33,9 @@ pipeline {
 		*/
 		stage ('Docker Build & Publish') {
 			steps{
-				sh 'docker build . --build-arg JAR=app-0.0.1.jar -t ${DOCKER_REPO}:${BUILD_NUMBER}'
-				sh 'docker push ${DOCKER_REPO}:${BUILD_NUMBER}'
-				sh 'docker tag	${DOCKER_REPO}:${BUILD_NUMBER} ${DOCKER_REPO}:latest'
+				sh 'docker build . --build-arg JAR=app-0.0.1.jar -t ${DOCKER_REPO}:Rev${GIT_COMMIT}'
+				sh 'docker push ${DOCKER_REPO}:Rev${GIT_COMMIT}'
+				sh 'docker tag	${DOCKER_REPO}:Rev${GIT_COMMIT} ${DOCKER_REPO}:latest'
 				sh 'docker push ${DOCKER_REPO}:latest'
 			}
 		}
