@@ -54,7 +54,7 @@ pipeline {
 		}
 		stage ('Docker Deploy') {
         	steps {
-        		pushDocker(authId: "it_gats_it_architecture")
+        		pushDocker(authId: "jenkins_ci_gen")
 			}
 		}
     }
