@@ -54,7 +54,7 @@ pipeline {
 		}
 		stage ('Docker Deploy') {
         	steps {
-        		pushDocker(authId: "jenkins_ci_gen")
+        		pushDocker(authId: "code_sda_app")
 			}
 		}
     }
