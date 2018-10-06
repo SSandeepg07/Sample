@@ -12,13 +12,13 @@ pipeline {
 	}
 
     stages {
-        stage ('Source Build') {
+        stage ('Build') {
         	steps {      
 				notifyBuildStart()			
 				sh 'mvn clean install'
             }
         }
-		stage ('SonarAnalysis') {
+		stage ('Test') {
 			steps {
 				sh 'mvn org.jacoco:jacoco-maven-plugin:prepare-agent test'
 				sonarScan('Sonar')
@@ -45,11 +45,16 @@ pipeline {
 			}
 		}
 		*/
-		stage ('Docker Build & Publish') {
+		stage ('Docker Build') {
 			steps{
 				sh 'docker build . --build-arg JAR=app-0.0.1.jar -t sda-app'
 				tagDocker(oldTag: 'sda-app', image: 'code-sda-demo_code-sda-app')
 				notifyDocker();
+			}
+		}
+		stage ('Docker Deploy') {
+        	steps {
+        		pushDocker(authId: "it_gats_it_architecture")
 			}
 		}
     }
