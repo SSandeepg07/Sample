@@ -28,7 +28,7 @@ spec:
       containers:
         -
           name: "code-sda-app"
-          image: "containers.cisco.com/it_gats_it_architecture/code-sda-demo_code-sda-app :__IMAGETAG__"
+          image: "containers.cisco.com/it_gats_it_architecture/code-sda-demo_code-sda-app:__IMAGETAG__"
           ports:
             -
               containerPort: 9090
