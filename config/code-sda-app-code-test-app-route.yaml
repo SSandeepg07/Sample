@@ -6,7 +6,7 @@ metadata:
   labels:
      component: "code-sda-app"
 spec:
-   host: "code-sda-app.cisco.com"
+   host: "code-sda-demoapp.cisco.com"
    to:
      kind: "Service"
      name: "code-sda-app"
