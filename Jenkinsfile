@@ -8,7 +8,7 @@ pipeline {
 	environment {
 		DOCKER_REGISTRY_URL = "containers.cisco.com"
 		DOCKER_REPOSITORY = "it_gats_it_architecture"
-		SPARK_ROOM = "3475cbde-fbfb-3777-b3f4-19767b168e3e"
+		SPARK_ROOM = "f8a4ba50-c8ae-11e8-83f0-e979ec425cee"
 	}
 
     stages {
