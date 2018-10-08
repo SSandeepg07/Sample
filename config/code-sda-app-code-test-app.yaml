@@ -76,7 +76,7 @@ spec:
                   fieldPath: metadata.annotations
       restartPolicy: "Always"
       dnsPolicy: "ClusterFirst"
-  replicas: 2
+  replicas: 1
   selector:
     name: "code-sda-app"
   triggers:
