@@ -1,8 +1,10 @@
 FROM java:8
+LABEL maintainer="deelogan@cisco.com"
+LABEL version="1.0"
 
 ARG JAR
 
-VOLUME ["/apps"]
+RUN mkdir "/apps"
 
 ADD ./target/${JAR} /apps/app.jar
 

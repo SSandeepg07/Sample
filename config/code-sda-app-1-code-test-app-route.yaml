@@ -2,14 +2,14 @@
 kind: "Route"
 apiVersion: "v1"
 metadata:
-  name: "code-sda-app"
+  name: "code-sda-app-1"
   labels:
-     component: "code-sda-app"
+     component: "code-sda-app-1"
 spec:
-   host: "code-sda-demoapp.cisco.com"
+   host: "code-sda-app.cisco.com"
    to:
      kind: "Service"
-     name: "code-sda-app"
+     name: "code-sda-app-1"
    port:
      targetPort: "web"
    tls:
