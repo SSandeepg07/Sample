@@ -11,10 +11,11 @@ pipeline {
         }
 		stage ('Two') {
 			agent {
-				docker{
+				docker {
 					reuseNode false
 				image 'ubuntu'
 				}
+			}
 			steps {
 				echo '2nd stage'
 			}
