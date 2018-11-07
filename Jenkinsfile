@@ -1,6 +1,9 @@
 pipeline {
 	agent any
-	
+	tools {
+		maven 'Maven-3.3.1'
+		jdk 'JDK1.8.0'
+	}
 	
 	environment {
 		DOCKER_REGISTRY_URL = "containers.cisco.com"
