@@ -14,6 +14,7 @@ pipeline {
 				Docker{
 					reuseNode false
 				image 'ubuntu'
+				}
 			steps {
 				echo '2nd stage'
 			}
@@ -24,40 +25,7 @@ pipeline {
 				}
 			}
 		}
-		/*
-		stage ('Test') {			
-			parallel {
-				stage ('Sonar') {
-					steps {
-						sh 'echo "skip...."'
-					}
-				}
-				stage ('Selenium') {
-					steps {
-						sh 'echo "skiping selenium...."'
-					}
-				}
-			}
-		}
 		
-		stage ('Docker Build') {
-			steps{
-				sh 'docker build . --build-arg JAR=app-0.0.1.jar -t sda-app'
-				tagDocker(oldTag: 'sda-app', image: 'code-sda-demo_code-sda-app')
-				notifyDocker();
-			}
-		}
-		stage ('Docker Deploy') {
-        	steps {
-        		pushDocker(authId: "code_sda_app")
-			}
-		}
-    }
-	
-	post{
-		always {
-			notifyBuildEnd()
-		} */
 	}
 	    
-}
+
