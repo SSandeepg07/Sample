@@ -19,11 +19,7 @@ pipeline {
 				echo '2nd stage'
 			}
 			}
-			post {
-				success {
-					echo 'success of 2nd stage'
-				}
-			}
+			
 		}
 		
 	}
