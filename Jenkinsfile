@@ -1,31 +1,24 @@
 pipeline {
 	agent any
-	tools {
-		maven 'Maven-3.3.1'
-		jdk 'JDK1.8.0'
-	}
 	
-	environment {
-		DOCKER_REGISTRY_URL = "containers.cisco.com"
-		DOCKER_REPOSITORY = "it_gats_it_architecture"
-		SPARK_ROOM = "f8a4ba50-c8ae-11e8-83f0-e979ec425cee"
-	}
+	
 
     stages {
-        stage ('Build') {
+        stage ('One') {
         	steps {      
-				notifyBuildStart()			
-				sh 'mvn clean install'
+			echo 'first stage'
             }
         }
-		stage ('Test') {
+		stage ('Two') {
+			agent Docker{
+				image 'ubuntu'
 			steps {
-				sh 'mvn org.jacoco:jacoco-maven-plugin:prepare-agent test'
-				sonarScan('Sonar')
+				echo '2nd stage'
+			}
 			}
 			post {
 				success {
-					junit testResults: 'target/surefire-reports/**/*.xml', allowEmptyResults: true
+					echo 'success of 2nd stage'
 				}
 			}
 		}
@@ -44,7 +37,7 @@ pipeline {
 				}
 			}
 		}
-		*/
+		
 		stage ('Docker Build') {
 			steps{
 				sh 'docker build . --build-arg JAR=app-0.0.1.jar -t sda-app'
@@ -63,5 +56,6 @@ pipeline {
 		always {
 			notifyBuildEnd()
 		}
-	}
+	} */
+	    
 }
