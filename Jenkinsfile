@@ -11,7 +11,7 @@ pipeline {
         }
 		stage ('Two') {
 			agent {
-				Docker{
+				docker{
 					reuseNode false
 				image 'ubuntu'
 				}
